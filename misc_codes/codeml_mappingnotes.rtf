@@ -1,0 +1,30 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\csgray\c0;}
+\margl1440\margr1440\vieww23400\viewh15640\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs22 \cf2 \CocoaLigature0 sed 's/.out:lnL(ntime://g' list.txt > list2.txt\
+\
+while read r;do cp $r /pathtofile/ ;done < /pathtofile/list2.txt \
+\
+ls *.aligned > list.txt\
+sed 's/.aligned//g' list.txt > list.txt2\
+cp list.txt2 /pathtofile/sequences\
+\
+\
+split -l 4 two_seqs.txt sequences/ortho_\
+while read r;do cp $r /pathtofile/ ;done < list.txt2 \
+\
+grep ".new:>" ortho* > protein_ids\
+awk '\{print $1\}' protein_ids > protein_ids2\
+sed 's/ortho_[a-z]*:alf.fasta.new:>lcl|NW_[0-9]*.1_cds_//g' protein_ids2  > protein_ids3\
+sed 's/ortho_[a-z]*:rgl.fasta.new:>//g' protein_ids3 > protein_ids4\
+\
+\
+seqtk seq -l 0 Nephotettix_cincticeps.faa.new.fasta.deduplicated.fasta > Grl.fasta\
+\
+while read -r line; do if echo "$line" | grep -q "\\.1_"; then echo "$line" | cut -d'_' -f1-2; else echo "$line"; fi; done < protein_ids4 > output.txt\
+\
+ while read r; do grep -A1 "$r" both.fasta >> protein_001.txt; done < output.txt}

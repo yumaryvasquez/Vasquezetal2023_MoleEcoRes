@@ -1,0 +1,121 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2709
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fmodern\fcharset0 Courier;\f1\fnil\fcharset0 Menlo-Regular;\f2\fnil\fcharset0 Monaco;
+}
+{\colortbl;\red255\green255\blue255;\red255\green238\blue149;\red21\green102\blue47;\red0\green0\blue0;
+\red38\green38\blue38;\red242\green239\blue236;\red212\green34\blue255;\red119\green117\blue165;\red209\green113\blue37;
+}
+{\*\expandedcolortbl;;\cssrgb\c100000\c94118\c64706;\cssrgb\c7451\c46667\c23922;\csgray\c0;
+\cssrgb\c20000\c20000\c20000;\cssrgb\c96078\c94902\c94118;\cssrgb\c87270\c29648\c100000;\cssrgb\c54198\c53904\c70625;\cssrgb\c85992\c52028\c18736;
+}
+\margl1440\margr1440\vieww15600\viewh8480\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \CocoaLigature0 #sed -En 's/\\(*?(([a-zA-Z]+)[^:]*):[^,]+/\\1/g; s/,/\\n/gp' \
+\
+\
+\
+for i in *.txt;do sed -En 's/\\(*?(([a-zA-Z]+)[^:]*):[^,]+/\\1/g; s/,/\\n/gp' $i > $i.temp.txt; done\
+\
+for i in *.txt; do sed 's/_/\\t/2' $i > $i.temp2.txt; done\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf4 \cb1 #for i in *.txt;do sed 's/\\tcorporis_/\\t/g' $i > $i.temp; done
+\f0\fs24 \cf2 \cb3 \
+\
+cat *.txt > all.txt\
+\
+\
+\
+\
+#awk 'NR == FNR \{T[$2] = $1; next\} \{for (t in T) gsub (t, T[t])\} 1' all.txt temp.fa\
+\
+\
+sed 's/\\(.[1-9]\\+\\)\\([a-zA-Z]\\)/\\1\\n\\2/g' all.txt >t.txt\
+\
+sed 's/\\(-RA\\+\\)\\([a-zA-Z]\\)/\\1\\n\\2/g' t.txt >t2.txt\
+\
+\
+\
+\
+\
+for i in *.fa; do awk 'NR == FNR \{T[$2] = $1; next\} \{for (t in T) gsub (t, T[t])\} 1' t2.txt $i > $i.2.fa; done\
+\
+\
+\
+
+\f1\fs22 \cf4 \cb1 awk 'BEGIN\{FS="\\t"; OFS="\\t"\} NR==FNR\{a[$1]=$2; next\} /^>/\{gsub(/^>/, "", $1); if($1 in a) $1=a[$1]\} 1' 
+\f0\fs24 \cf2 \cb3 \
+\
+\
+catfasta2phyml  *.fa.2.fa.aligned > aligned.phy\
+\
+catfasta2phyml  *.fa.2.fa.aligned > aligned.phy\
+.trimmed\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f2\fs28 \cf5 \cb6 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \shad\shadx0\shady-20\shadr0\shado255 \shadc0 seqkit concat f.*.fa\
+\
+\
+For cafe if receiving \'93taxon was not found in gene family OG000\'94; then use \'93dos2unix file.txt\'94\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf4 \cb1 \kerning1\expnd0\expndtw0 \CocoaLigature0 \shad0 awk 'BEGIN\{ FS = OFS = "\\t" \} \{ print (NR==1? "Desc" : "(null)"), $0 \}' temp.tsv > temp2.tsv\
+\
+awk '\{$21=""; print $0\}' temp2.tsv > temp.tsv\
+\
+ sed -e 's/ /\\t/g' temp.tsv > temp2.tsv\
+\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 sed 's/\\s.*$//'\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf4 \kerning1\expnd0\expndtw0 \CocoaLigature0 while read p; do sed 's/\\s.*$//' $p; done < protein_mac.txt\
+\
+while read p; do grep "$p" all.fa ; done < temp2.txt
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 \
+
+\f1\fs22 \cf4 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf7 while \cf8 read\cf4  p; \cf7 do\cf4 \
+  cp  /pathtofile/$\{\cf9 p\cf4 \}.fa  /pathtofile/mac\
+\cf7 done\cf4  < mac.txt\
+\
+\
+\
+\
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf0 \expnd0\expndtw0\kerning0
+\CocoaLigature1 seqtk seq -l 0 input_file\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf4 \kerning1\expnd0\expndtw0 \CocoaLigature0 \
+\
+while read p; do grep -A1 "$p" all.fa ; done < temp2.txt > output.txt\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \
+\
+\
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f1\fs22 \cf4 \cb1 awk 'FNR==NR\{a[$1];next\} !($2 in a)' removed_families.txt temp2.tsv   > results.tsv\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 \cb3 \
+}
